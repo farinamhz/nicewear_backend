@@ -1,5 +1,7 @@
 import re
 
+from django.contrib.auth.hashers import make_password
+
 from . import models
 from rest_framework import serializers
 
@@ -10,6 +12,10 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'password', 'email', 'credit', 'role')
         extra_kwargs = {'password': {'write_only': True}, 'email': {'write_only': True}}
         # read_only_fields = 'credit'
+
+    def create(self, validated_data):
+        validated_data['password'] = make_password(validated_data.get('password'))
+        return super(UserSerializer, self).create(validated_data)
 
 
 class PhoneSerializer(serializers.ModelSerializer):
