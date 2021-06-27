@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = models.User
         fields = ('id', 'username', 'password', 'email', 'credit', 'role')
         extra_kwargs = {'password': {'write_only': True}, 'email': {'write_only': True}}
-        read_only_fields = 'credit'
+        # read_only_fields = 'credit'
 
 
 class PhoneSerializer(serializers.ModelSerializer):
