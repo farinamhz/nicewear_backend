@@ -16,7 +16,9 @@ class Order(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    color = models.CharField(max_length=20)
+    color1 = models.CharField(max_length=20)
+    color2 = models.CharField(max_length=20)
+    color3 = models.CharField(max_length=20)
     price = models.PositiveIntegerField(default=0, blank=False)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     picture = models.ImageField(null=True, blank=True, upload_to="product_picture")
@@ -25,6 +27,11 @@ class Product(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
+
+
+class CategoryProduct(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
 
 class SubCategory(models.Model):
