@@ -6,14 +6,14 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Order
         fields = "__all__"
-        read_only_fields = 'created_date'
+        # read_only_fields = 'created_date'
 
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Product
         fields = "__all__"
-        read_only_fields = 'count_seen'
+        # read_only_fields = 'count_seen'
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -27,3 +27,14 @@ class SubCategorySerializer(serializers.ModelSerializer):
         model = models.SubCategory
         fields = "__all__"
 
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Comment
+        fields = "__all__"
+
+
+class CategoryProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.CategoryProduct
+        fields = "__all__"
