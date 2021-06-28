@@ -10,6 +10,8 @@ class Order(models.Model):
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True, blank=False)
     receive_date = models.DateTimeField()
+    status_choices = ((1, "Pending"), (2, "Finished"))
+    status = models.IntegerField(choices=status_choices, default=1)
 
 
 class Product(models.Model):
