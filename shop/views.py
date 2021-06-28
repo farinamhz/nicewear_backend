@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics, viewsets, status
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 
@@ -89,8 +90,33 @@ class CreateProduct(generics.CreateAPIView):
 
 
 class DeleteProduct(generics.DestroyAPIView):
-    permission_classes = [IsAuthenticated, ]    # + IsOwner
+    permission_classes = [IsAuthenticated, ]  # + IsOwner
     queryset = models.Product.objects.all()
 
     def get_queryset(self):
         return models.Product.objects.filter(pk=self.kwargs['pk'], seller=self.request.user)
+
+
+@api_view(['GET', ])
+@permission_classes((IsAuthenticated, ))
+def get_product(request, pk):
+    try:
+        product = models.Product.objects.get(pk=pk)
+        product.count_seen += 1
+        product.save()
+
+    except product.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    prod_ser = serializers.ProductSerializer(product)
+    return Response(prod_ser.data, status=status.HTTP_200_OK)
+
+
+# class GetProductById(generics.RetrieveUpdateAPIView):
+#     queryset = models.Product.objects.all()
+#     serializer_class = serializers.ProductReadSerializer
+#     # lookup_field = 'pk'
+#     #
+#     def get_object(self):
+#         pk = self.kwargs["pk"]
+#         tr
+#         return get_object_or_404(models.Product, pk=pk)
