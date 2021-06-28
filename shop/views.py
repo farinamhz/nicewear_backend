@@ -52,6 +52,7 @@ class GetCategoryById(generics.ListAPIView):
 class CreateProduct(generics.CreateAPIView):
     serializer_class = serializers.ProductSerializer
     queryset = models.Product.objects.all()
+    permission_classes = IsAuthenticated
 
     def create(self, request, *args, **kwargs):
         context1 = {
@@ -98,7 +99,7 @@ class DeleteProduct(generics.DestroyAPIView):
 
 
 @api_view(['GET', ])
-@permission_classes((IsAuthenticated, ))
+# @permission_classes((IsAuthenticated, ))
 def get_product(request, pk):
     try:
         product = models.Product.objects.get(pk=pk)
