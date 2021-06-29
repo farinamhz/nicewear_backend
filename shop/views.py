@@ -87,12 +87,12 @@ class GetProductByCategory1(generics.RetrieveAPIView):
         return Response(serializer.data)
 
 
-class GetProductByCategory2(generics.RetrieveAPIView):
+class GetProductByCategories(generics.RetrieveAPIView):
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductSerializer
 
     def get(self, request, *args, **kwargs):
-        obj = models.Product.objects.filter(category2__pk=self.kwargs['pk'])
+        obj = models.Product.objects.filter(category2__pk=self.kwargs['pk2'], category1__pk=self.kwargs['pk1'])
         serializer = self.serializer_class(obj, many=True)
         return Response(serializer.data)
 
