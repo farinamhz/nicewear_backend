@@ -33,8 +33,3 @@ class CommentSerializer(serializers.ModelSerializer):
         model = models.Comment
         fields = "__all__"
 
-
-class CategoryProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.CategoryProduct
-        fields = "__all__"

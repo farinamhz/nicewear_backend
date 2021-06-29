@@ -1,0 +1,65 @@
+[
+  {
+    "model": "shop.Category",
+    "pk": 1,
+    "fields": {
+      "name": "زنانه"
+    }
+  },
+  {
+    "model": "shop.Category",
+    "pk": 2,
+    "fields": {
+      "name": "مردانه"
+    }
+  },
+  {
+    "model": "shop.Category",
+    "pk": 3,
+    "fields": {
+      "name": "بچگانه"
+    }
+  },
+  {
+    "model": "shop.Category",
+    "pk": 4,
+    "fields": {
+      "name": "تی‌شرت"
+    }
+  },
+  {
+    "model": "shop.Category",
+    "pk": 5,
+    "fields": {
+      "name": "تاپ"
+    }
+  },
+  {
+    "model": "shop.Category",
+    "pk": 6,
+    "fields": {
+      "name": "شومیز"
+    }
+  },
+  {
+    "model": "shop.Category",
+    "pk": 7,
+    "fields": {
+      "name": "مانتو"
+    }
+  },
+  {
+    "model": "shop.Category",
+    "pk": 8,
+    "fields": {
+      "name": "کوله پشتی"
+    }
+  },
+  {
+    "model": "shop.Category",
+    "pk": 9,
+    "fields": {
+      "name": "دمپایی"
+    }
+  }
+]

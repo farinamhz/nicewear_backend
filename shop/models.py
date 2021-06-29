@@ -14,24 +14,27 @@ class Order(models.Model):
     status = models.IntegerField(choices=status_choices, default=1)
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+
+
 class Product(models.Model):
     name = models.CharField(max_length=100)
     color1 = models.CharField(max_length=20)
     color2 = models.CharField(max_length=20)
     color3 = models.CharField(max_length=20)
+    category1 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category1')
+    category2 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category2')
     price = models.PositiveIntegerField(default=0, blank=False)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
-    picture = models.ImageField(null=True, blank=True, upload_to="product_picture")
+    picture = models.ImageField(null=False, upload_to="product_picture")
     count_seen = models.PositiveIntegerField(default=0, blank=False)
 
-
-class Category(models.Model):
-    name = models.CharField(max_length=50)
-
-
-class CategoryProduct(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    def get_str_picture(self):
+        if self.picture:
+            return str(self.picture.url)
+        else:
+            return None
 
 
 class SubCategory(models.Model):

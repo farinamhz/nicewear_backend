@@ -37,12 +37,12 @@ class GetCategories(generics.ListAPIView):
 #     serializer_class = serializers.CategorySerializer
 
 
-class GetCategoryById(generics.ListAPIView):
+class GetCategoryById(generics.RetrieveAPIView):
     queryset = models.Category.objects.all()
     serializer_class = serializers.CategorySerializer
 
-    def get(self, request, pk, *args, **kwargs):
-        category_id_list = models.SubCategory.objects.filter(category=pk).values_list('sub_category',
+    def get(self, request, *args, **kwargs):
+        category_id_list = models.SubCategory.objects.filter(category=self.kwargs['pk']).values_list('sub_category',
                                                                                       flat=True)
         obj = models.Category.objects.filter(pk__in=category_id_list)
         serializer = self.serializer_class(obj, many=True)
@@ -52,42 +52,7 @@ class GetCategoryById(generics.ListAPIView):
 class CreateProduct(generics.CreateAPIView):
     serializer_class = serializers.ProductSerializer
     queryset = models.Product.objects.all()
-    permission_classes = IsAuthenticated
-
-    def create(self, request, *args, **kwargs):
-        context1 = {
-            'name': request.data["post"],
-            'color1': request.data["color1"],
-            'color2': request.data["color2"],
-            'color3': request.data["color3"],
-            'price': request.data["price"],
-            'seller': request.data["seller"],
-            'picture': request.data["picture"]
-        }
-        self.context2 = {
-            'category1': request.data["category1"],
-        }
-        self.context3 = {
-            'category1': request.data["category1"],
-        }
-
-        serializer = self.get_serializer(data=context1)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-    def perform_create(self, serializer):
-        obj = serializer.save()
-        self.context2['product'] = obj.id
-        self.context3['product'] = obj.id
-        cp_serializer1 = serializers.CategoryProductSerializer(data=self.context2)
-        cp_serializer2 = serializers.CategoryProductSerializer(data=self.context3)
-        if cp_serializer1.is_valid() and cp_serializer2.is_valid():
-            cp_serializer1.save()
-            cp_serializer2.save()
-        else:
-            return Response(cp_serializer1.errors, status=status.HTTP_400_BAD_REQUEST)
+    permission_classes = (IsAuthenticated,)
 
 
 class DeleteProduct(generics.DestroyAPIView):
@@ -105,12 +70,41 @@ def get_product(request, pk):
         product = models.Product.objects.get(pk=pk)
         product.count_seen += 1
         product.save()
+        prod_ser = serializers.ProductSerializer(product)
+        return Response(prod_ser.data, status=status.HTTP_200_OK)
 
-    except product.DoesNotExist:
+    except models.Product.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    prod_ser = serializers.ProductSerializer(product)
-    return Response(prod_ser.data, status=status.HTTP_200_OK)
 
+
+class GetProductByCategory1(generics.RetrieveAPIView):
+    queryset = models.Product.objects.all()
+    serializer_class = serializers.ProductSerializer
+
+    def get(self, request, *args, **kwargs):
+        obj = models.Product.objects.filter(category1__pk=self.kwargs['pk'])
+        serializer = self.serializer_class(obj, many=True)
+        return Response(serializer.data)
+
+
+class GetProductByCategory2(generics.RetrieveAPIView):
+    queryset = models.Product.objects.all()
+    serializer_class = serializers.ProductSerializer
+
+    def get(self, request, *args, **kwargs):
+        obj = models.Product.objects.filter(category2__pk=self.kwargs['pk'])
+        serializer = self.serializer_class(obj, many=True)
+        return Response(serializer.data)
+
+#
+# class GetProductByCountSeen(generics.RetrieveAPIView):
+#     queryset = models.Product.objects.all()
+#     serializer_class = serializers.ProductSerializer
+#
+#     def get(self, request, *args, **kwargs):
+#         obj = models.Product.objects.filter(category2__pk=self.kwargs['pk'])
+#         serializer = self.serializer_class(obj, many=True)
+#         return Response(serializer.data)
 
 # class GetProductById(generics.RetrieveUpdateAPIView):
 #     queryset = models.Product.objects.all()
