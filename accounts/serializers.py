@@ -24,7 +24,7 @@ class PhoneSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def validate_phone(self, value):
-        pattern = re.compile("^\+?[1-9]\d{1,14}$")
+        pattern = re.compile("^09\d{9}$")
         if pattern.match(value) is None:
             raise serializers.ValidationError("the format of phone is invalid")
         return value
