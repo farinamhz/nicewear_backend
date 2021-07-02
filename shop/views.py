@@ -96,6 +96,17 @@ class GetProductByCategories(generics.RetrieveAPIView):
         serializer = self.serializer_class(obj, many=True)
         return Response(serializer.data)
 
+
+class GetComments(generics.RetrieveAPIView):
+    queryset = models.Comment.objects.all()
+    serializer_class = serializers.CommentSerializer
+
+    def get(self, request, *args, **kwargs):
+        obj = models.Comment.objects.filter(product__pk=self.kwargs['pk'])
+        serializer = self.serializer_class(obj, many=True)
+        return Response(serializer.data)
+
+
 #
 # class GetProductByCountSeen(generics.RetrieveAPIView):
 #     queryset = models.Product.objects.all()
