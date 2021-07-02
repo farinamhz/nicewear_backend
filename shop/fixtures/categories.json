@@ -3,63 +3,56 @@
     "model": "shop.Category",
     "pk": 1,
     "fields": {
-      "name": "زنانه"
+      "name": "Women"
     }
   },
   {
     "model": "shop.Category",
     "pk": 2,
     "fields": {
-      "name": "مردانه"
+      "name": "Men"
     }
   },
   {
     "model": "shop.Category",
     "pk": 3,
     "fields": {
-      "name": "بچگانه"
+      "name": "Kids"
     }
   },
   {
     "model": "shop.Category",
     "pk": 4,
     "fields": {
-      "name": "تی‌شرت"
+      "name": "Clothing"
     }
   },
   {
     "model": "shop.Category",
     "pk": 5,
     "fields": {
-      "name": "تاپ"
+      "name": "Bag"
     }
   },
   {
     "model": "shop.Category",
     "pk": 6,
     "fields": {
-      "name": "شومیز"
+      "name": "Shoe"
     }
   },
   {
     "model": "shop.Category",
     "pk": 7,
     "fields": {
-      "name": "مانتو"
+      "name": "Accessory"
     }
   },
   {
     "model": "shop.Category",
     "pk": 8,
     "fields": {
-      "name": "کوله پشتی"
-    }
-  },
-  {
-    "model": "shop.Category",
-    "pk": 9,
-    "fields": {
-      "name": "دمپایی"
+      "name": "Workout"
     }
   }
 ]

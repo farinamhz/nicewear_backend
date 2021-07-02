@@ -1,0 +1,114 @@
+[
+  {
+    "model": "shop.SubCategory",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "sub_category": 4
+    }
+  },
+  {
+    "model": "shop.SubCategory",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "sub_category": 5
+    }
+  },
+  {
+    "model": "shop.SubCategory",
+    "pk": 3,
+    "fields": {
+      "category": 1,
+      "sub_category": 6
+    }
+  },
+  {
+    "model": "shop.SubCategory",
+    "pk": 4,
+    "fields": {
+      "category": 1,
+      "sub_category": 7
+    }
+  },
+  {
+    "model": "shop.SubCategory",
+    "pk": 5,
+    "fields": {
+      "category": 1,
+      "sub_category": 8
+    }
+  },
+  {
+    "model": "shop.SubCategory",
+    "pk": 6,
+    "fields": {
+      "category": 2,
+      "sub_category": 4
+    }
+  },
+  {
+    "model": "shop.SubCategory",
+    "pk": 7,
+    "fields": {
+      "category": 2,
+      "sub_category": 5
+    }
+  },
+  {
+    "model": "shop.SubCategory",
+    "pk": 8,
+    "fields": {
+      "category": 2,
+      "sub_category": 6
+    }
+  },
+  {
+    "model": "shop.SubCategory",
+    "pk": 9,
+    "fields": {
+      "category": 2,
+      "sub_category": 7
+    }
+  },
+  {
+    "model": "shop.SubCategory",
+    "pk": 10,
+    "fields": {
+      "category": 2,
+      "sub_category": 8
+    }
+  },
+  {
+    "model": "shop.SubCategory",
+    "pk": 11,
+    "fields": {
+      "category": 3,
+      "sub_category": 4
+    }
+  },
+  {
+    "model": "shop.SubCategory",
+    "pk": 12,
+    "fields": {
+      "category": 3,
+      "sub_category": 5
+    }
+  },
+  {
+    "model": "shop.SubCategory",
+    "pk": 13,
+    "fields": {
+      "category": 3,
+      "sub_category": 6
+    }
+  },
+  {
+    "model": "shop.SubCategory",
+    "pk": 14,
+    "fields": {
+      "category": 3,
+      "sub_category": 7
+    }
+  }
+]
