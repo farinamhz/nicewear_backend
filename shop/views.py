@@ -87,6 +87,35 @@ class GetProductByCategory1(generics.RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
         obj = models.Product.objects.filter(category1__pk=self.kwargs['pk'])
+
+        if request.GET.get('sort', ''):
+            search_obj = request.GET.get('sort', '')
+            if search_obj == "desc":
+                if request.GET.get('size', ''):
+                    search_obj = request.GET.get('size', '')
+                    obj = models.Product.objects.filter(category1__pk=self.kwargs['pk'],
+                                                        size=search_obj).order_by('-price')
+                else:
+                    obj = models.Product.objects.filter(category1__pk=self.kwargs['pk']).order_by('-price')
+            elif search_obj == "asc":
+                if request.GET.get('size', ''):
+                    search_obj = request.GET.get('size', '')
+                    obj = models.Product.objects.filter(category1__pk=self.kwargs['pk'],
+                                                        size=search_obj).order_by('price')
+                else:
+                    obj = models.Product.objects.filter(category1__pk=self.kwargs['pk']).order_by('price')
+            elif search_obj == "recommended":
+                if request.GET.get('size', ''):
+                    search_obj = request.GET.get('size', '')
+                    obj = models.Product.objects.filter(category1__pk=self.kwargs['pk'],
+                                                        size=search_obj).order_by('-count_seen')
+                else:
+                    obj = models.Product.objects.filter(category1__pk=self.kwargs['pk']).order_by('-count_seen')
+
+        elif request.GET.get('size', ''):
+            search_obj = request.GET.get('size', '')
+            obj = models.Product.objects.filter(category1__pk=self.kwargs['pk'],
+                                                size=search_obj)
         serializer = self.serializer_class(obj, many=True)
         return Response(serializer.data)
 
@@ -97,6 +126,42 @@ class GetProductByCategories(generics.RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
         obj = models.Product.objects.filter(category2__pk=self.kwargs['pk2'], category1__pk=self.kwargs['pk1'])
+
+        if request.GET.get('sort', ''):
+            search_obj = request.GET.get('sort', '')
+            if search_obj == "desc":
+                if request.GET.get('size', ''):
+                    search_obj = request.GET.get('size', '')
+                    obj = models.Product.objects.filter(category1__pk=self.kwargs['pk1'],
+                                                        category2__pk=self.kwargs['pk2'],
+                                                        size=search_obj).order_by('-price')
+                else:
+                    obj = models.Product.objects.filter(category1__pk=self.kwargs['pk1'],
+                                                        category2__pk=self.kwargs['pk2']).order_by('-price')
+            elif search_obj == "asc":
+                if request.GET.get('size', ''):
+                    search_obj = request.GET.get('size', '')
+                    obj = models.Product.objects.filter(category1__pk=self.kwargs['pk1'],
+                                                        category2__pk=self.kwargs['pk2'],
+                                                        size=search_obj).order_by('price')
+                else:
+                    obj = models.Product.objects.filter(category1__pk=self.kwargs['pk1'],
+                                                        category2__pk=self.kwargs['pk2']).order_by('price')
+            elif search_obj == "recommended":
+                if request.GET.get('size', ''):
+                    search_obj = request.GET.get('size', '')
+                    obj = models.Product.objects.filter(category1__pk=self.kwargs['pk1'],
+                                                        category2__pk=self.kwargs['pk2'],
+                                                        size=search_obj).order_by('-count_seen')
+                else:
+                    obj = models.Product.objects.filter(category1__pk=self.kwargs['pk1'],
+                                                        category2__pk=self.kwargs['pk2']).order_by('-count_seen')
+
+        elif request.GET.get('size', ''):
+            search_obj = request.GET.get('size', '')
+            obj = models.Product.objects.filter(category1__pk=self.kwargs['pk1'], category2__pk=self.kwargs['pk2'],
+                                                size=search_obj)
+
         serializer = self.serializer_class(obj, many=True)
         return Response(serializer.data)
 
