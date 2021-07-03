@@ -1,17 +1,18 @@
 from django.db import models
-from accounts.models import User, Address
+from accounts.models import User, Address, Phone
 
 
 # Create your models here.
 
 
-class Order(models.Model):
+class MainOrder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    phone = models.ForeignKey(Phone, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True, blank=False)
     receive_date = models.DateTimeField()
-    status_choices = ((1, "Pending"), (2, "Finished"))
-    status = models.IntegerField(choices=status_choices, default=1)
+    # status_choices = ((1, "Pending"), (2, "Finished"))
+    # status = models.IntegerField(choices=status_choices, default=1)
 
 
 class Category(models.Model):
@@ -44,12 +45,17 @@ class SubCategory(models.Model):
     sub_category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='sub_category')
 
 
-class OrderProduct(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-
-
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     text = models.TextField(blank=False)
+
+
+class OrderProduct(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+
+class OrderList(models.Model):
+    order = models.ForeignKey(OrderProduct, on_delete=models.CASCADE)
+    main_order = models.ForeignKey(MainOrder, on_delete=models.CASCADE)

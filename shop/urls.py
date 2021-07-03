@@ -16,4 +16,10 @@ urlpatterns = [
     path('get-product-category1-category2/<int:pk1>/<int:pk2>/', views.GetProductByCategories.as_view()),
     path('create-comment/', views.CreateComment.as_view()),
     path('get-comments/<int:pk>/', views.GetComments.as_view()),
+    path('buy-product/', views.BuyThisProduct.as_view()),
+    path('get-orders/<int:pk>/', views.GetOrders.as_view()),
+    path('create-main-order/', views.create_main_order),
+    path('buy/<int:pk>/', views.DeleteOrders.as_view()),
+    path('get-main-order/<int:pk>/', views.GetMainOrder.as_view()),
+    path('delete-order/<int:pk>/', views.DeleteOrder.as_view()),
 ]
