@@ -10,7 +10,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     role_choices = ((1, "User"), (2, "Seller"))
     role = models.IntegerField(choices=role_choices, default=1)
-    credit = models.IntegerField(blank=False, default=0)
+    credit = models.IntegerField(blank=False, default=1000000)
 
 
 class Phone(models.Model):
@@ -26,3 +26,4 @@ class Phone(models.Model):
 class Address(models.Model):
     about = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    postal_code = models.CharField(max_length=15)
