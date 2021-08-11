@@ -1,2 +1,2 @@
 # nicewear_backend
-server side of a cloth and accessories shop
+The server side of a cloth and accessory shop
